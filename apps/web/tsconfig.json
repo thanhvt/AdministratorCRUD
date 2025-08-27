@@ -1,0 +1,20 @@
+{
+  "extends": "@banking/config/tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@banking/ui": ["../../packages/ui/src"],
+      "@banking/services": ["../../packages/services/src"],
+      "@banking/config": ["../../packages/config"],
+      "@banking/modules/*": ["../../packages/modules/*/src"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

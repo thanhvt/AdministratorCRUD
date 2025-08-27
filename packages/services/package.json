@@ -1,0 +1,29 @@
+{
+  "name": "@banking/services",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared business logic and services for the banking application",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "axios": "^1.5.0",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "@banking/config": "workspace:*",
+    "@types/js-cookie": "^3.0.4",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/react": "^18.2.21",
+    "eslint": "^8.48.0",
+    "react": "^18.2.0",
+    "typescript": "^5.2.2"
+  }
+}

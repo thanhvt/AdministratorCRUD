@@ -1,0 +1,28 @@
+{
+  "name": "@banking/modules-user-settings",
+  "version": "1.0.0",
+  "private": true,
+  "description": "User settings and preferences module for banking application",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@banking/ui": "workspace:*",
+    "@banking/services": "workspace:*"
+  },
+  "devDependencies": {
+    "@banking/config": "workspace:*",
+    "@types/react": "^18.2.21",
+    "eslint": "^8.48.0",
+    "react": "^18.2.0",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}
