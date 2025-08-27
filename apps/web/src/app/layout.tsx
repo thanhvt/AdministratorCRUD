@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { SessionTimeoutProvider } from '../components/providers/session-timeout-provider'
+import { QueryProvider } from '../components/providers/query-provider'
+import { Toaster } from '@banking/ui'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionTimeoutProvider>
-          {children}
-        </SessionTimeoutProvider>
+        <QueryProvider>
+          <SessionTimeoutProvider>
+            {children}
+            <Toaster />
+          </SessionTimeoutProvider>
+        </QueryProvider>
       </body>
     </html>
   )

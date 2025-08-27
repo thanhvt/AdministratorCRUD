@@ -10,13 +10,19 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@banking/ui": "workspace:*",
-    "@banking/services": "workspace:*",
     "@banking/modules": "workspace:*",
+    "@banking/services": "workspace:*",
+    "@banking/ui": "workspace:*",
+    "@tanstack/react-query": "^5.85.5",
+    "@tanstack/react-table": "^8.21.3",
+    "lightweight-charts": "^5.0.8",
     "next": "14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "react-hook-form": "^7.62.0",
+    "sonner": "^2.0.7",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^4.1.3"
   },
   "devDependencies": {
     "@banking/config": "workspace:*",
