@@ -1,11 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@banking/services'
 import { Button, Card, CardHeader, CardTitle, CardContent } from '@banking/ui'
 import { DashboardLayout } from '../../components/layout/dashboard-layout'
 
 export default function DashboardPage() {
+    const router = useRouter()
   const { user, getCurrentUser, logout } = useAuthStore()
 
   useEffect(() => {
@@ -53,7 +55,7 @@ export default function DashboardPage() {
               <p className="text-sm text-gray-600 mb-4">
                 Manage securities portfolio and custody services
               </p>
-              <Button className="w-full">
+              <Button className="w-full" onClick={() => router.push('/securities')}>
                 Access Securities
               </Button>
             </CardContent>
@@ -67,7 +69,7 @@ export default function DashboardPage() {
               <p className="text-sm text-gray-600 mb-4">
                 Execute trades and monitor market positions
               </p>
-              <Button className="w-full">
+              <Button className="w-full" onClick={() => router.push('/trading')}>
                 Access Trading
               </Button>
             </CardContent>
@@ -81,7 +83,7 @@ export default function DashboardPage() {
               <p className="text-sm text-gray-600 mb-4">
                 Customize your personal preferences and security settings
               </p>
-              <Button className="w-full">
+              <Button className="w-full" onClick={() => router.push('/user-settings')}>
                 Manage Settings
               </Button>
             </CardContent>
