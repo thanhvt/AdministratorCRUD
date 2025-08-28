@@ -2,8 +2,9 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Bell, UserCircle, Menu, Package2, Search, UserCog, LogOut } from "lucide-react"
+import { Bell, Menu, Package2, Search, UserCog, LogOut } from "lucide-react"
 
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 import { Button } from "./button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu"
 import { Input } from "./input"
@@ -24,7 +25,7 @@ interface HeaderProps {
 
 export function Header({ user, onMenuClick, onLogout }: HeaderProps) {
   return (
-    <header className="flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="flex h-16 items-center gap-4 border-b border-border/40 bg-transparent px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         {/* This part is for mobile sheet, but we can have a logo here for desktop too if needed */}
       </nav>
@@ -88,9 +89,19 @@ export function Header({ user, onMenuClick, onLogout }: HeaderProps) {
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <UserCircle className="h-5 w-5" />
-              <span className="sr-only">Toggle user menu</span>
+            <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+              <Avatar className="h-9 w-9">
+                <AvatarImage src="" alt={user?.name || 'Avatar'} />
+                <AvatarFallback>
+                  {user?.name
+                    ? user.name
+                        .split(' ')
+                        .map((n) => n[0])
+                        .join('')
+                        .toUpperCase()
+                    : 'AD'}
+                </AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">

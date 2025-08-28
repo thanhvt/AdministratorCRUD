@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, Landmark, LogOut, Settings, TrendingUp, UserCog } from "lucide-react"
+import { motion } from "framer-motion"
 
 import { cn } from "../lib/utils"
 import { Button } from "./button"
@@ -33,7 +34,12 @@ export function Sidebar({ isCollapsed, onLogout }: SidebarProps) {
   const pathname = usePathname()
 
   return (
-    <aside className={cn("hidden border-r bg-background md:block transition-all duration-300", isCollapsed ? "w-20" : "w-64")}>
+    <motion.aside
+      initial={false}
+      animate={{ width: isCollapsed ? '5rem' : '16rem' }}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+      className={cn("hidden border-r border-white/10 bg-card/60 backdrop-blur-lg md:block overflow-hidden")}
+    >
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-16 items-center border-b px-4">
           <Link href="/dashboard">
@@ -86,7 +92,7 @@ export function Sidebar({ isCollapsed, onLogout }: SidebarProps) {
           </TooltipProvider>
         </div>
       </div>
-    </aside>
+    </motion.aside>
   )
 }
 

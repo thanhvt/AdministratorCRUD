@@ -1,5 +1,5 @@
 // Components
-export * from "./components/button"
+export { Button, buttonVariants } from "./components/button"
 export * from "./components/input"
 export * from "./components/card"
 export * from "./components/dialog"
@@ -21,9 +21,11 @@ export * from "./components/icon"
 export * from "./components/badge"
 export * from "./components/logo"
 export * from "./components/empty-state"
+export * from "./components/avatar"
 
 
 
+export { staggerContainer, fadeIn, slideIn } from "./lib/animations"
 
 
 // Utils
