@@ -10,10 +10,10 @@ interface MarketOverviewProps {
 
 export function MarketOverview({ className }: MarketOverviewProps) {
   return (
-    <Card className={`bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 border-slate-200 dark:border-slate-700 ${className}`}>
+    <Card className={`bg-green-gradient-primary border-2 border-green-600 dark:border-green-400 shadow-lg shadow-green-500/20 ${className}`}>
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <CardTitle className="text-lg font-semibold text-white dark:text-green-100 flex items-center gap-2">
+          <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></div>
           Market Overview
         </CardTitle>
       </CardHeader>
@@ -36,23 +36,23 @@ function MarketIndexItem({ index }: { index: MarketIndex }) {
     : 'bg-red-50 dark:bg-red-900/20'
 
   return (
-    <div className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all duration-200">
+    <div className="flex items-center justify-between p-3 rounded-lg bg-green-gradient-secondary border-2 border-green-400 dark:border-green-300 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-200">
       <div className="flex-1">
         <div className="flex items-center gap-2">
-          <h3 className="font-medium text-slate-900 dark:text-slate-100">{index.name}</h3>
-          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">{index.symbol}</span>
+          <h3 className="font-medium text-white dark:text-green-100">{index.name}</h3>
+          <span className="text-xs text-green-100 dark:text-green-200 font-mono">{index.symbol}</span>
         </div>
-        <p className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-1">
+        <p className="text-lg font-semibold text-white dark:text-green-50 mt-1">
           {index.value}
         </p>
       </div>
-      <div className={`flex items-center gap-1 px-2 py-1 rounded-md ${bgColor}`}>
+      <div className={`flex items-center gap-1 px-3 py-2 rounded-md bg-white/20 backdrop-blur-sm border border-white/30`}>
         {isPositive ? (
-          <TrendingUp className="w-3 h-3" />
+          <TrendingUp className="w-4 h-4 text-green-200" />
         ) : (
-          <TrendingDown className="w-3 h-3" />
+          <TrendingDown className="w-4 h-4 text-red-300" />
         )}
-        <div className={`text-sm font-medium ${changeColor}`}>
+        <div className={`text-sm font-bold text-white`}>
           <span className="block">{index.change}</span>
           <span className="text-xs">{index.changePercent}</span>
         </div>

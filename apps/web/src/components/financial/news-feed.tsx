@@ -10,10 +10,10 @@ interface NewsFeedProps {
 
 export function NewsFeed({ className }: NewsFeedProps) {
   return (
-    <Card className={`bg-gradient-to-br from-amber-50 to-orange-100 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-200 dark:border-amber-700 ${className}`}>
+    <Card className={`bg-green-gradient-tertiary border-2 border-green-600 dark:border-green-400 shadow-lg shadow-green-500/20 ${className}`}>
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg font-semibold text-amber-800 dark:text-amber-200 flex items-center gap-2">
-          <Newspaper className="w-5 h-5" />
+        <CardTitle className="text-lg font-semibold text-white dark:text-green-100 flex items-center gap-2">
+          <Newspaper className="w-5 h-5 text-green-200" />
           Market News
         </CardTitle>
       </CardHeader>
@@ -23,8 +23,8 @@ export function NewsFeed({ className }: NewsFeedProps) {
             <NewsItem key={news.id} news={news} />
           ))}
         </div>
-        <div className="mt-4 pt-3 border-t border-amber-200 dark:border-amber-700">
-          <div className="flex items-center justify-center gap-2 text-xs text-amber-600 dark:text-amber-400">
+        <div className="mt-4 pt-3 border-t border-green-300/50">
+          <div className="flex items-center justify-center gap-2 text-xs text-green-100 dark:text-green-200 font-medium">
             <TrendingUp className="w-3 h-3" />
             <span>Stay informed with real-time market updates</span>
           </div>
@@ -53,22 +53,22 @@ function NewsItem({ news }: { news: NewsItem }) {
   }
 
   return (
-    <div className="p-3 rounded-lg bg-white dark:bg-slate-800 border border-amber-200 dark:border-amber-700 hover:shadow-md transition-all duration-200 hover:scale-[1.01]">
+    <div className="p-3 rounded-lg bg-green-gradient-full border-2 border-green-400 dark:border-green-300 hover:shadow-lg hover:shadow-green-500/30 transition-all duration-200 hover:scale-[1.01]">
       <div className="flex items-start gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(news.category)}`}>
+            <span className={`px-2 py-1 rounded-full text-xs font-bold bg-white/20 backdrop-blur-sm border border-white/30 text-white`}>
               {news.category.charAt(0).toUpperCase() + news.category.slice(1)}
             </span>
-            <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+            <div className="flex items-center gap-1 text-xs text-green-100 dark:text-green-200">
               <Clock className="w-3 h-3" />
               <span>{news.timestamp}</span>
             </div>
           </div>
-          <h4 className="text-sm font-medium text-slate-900 dark:text-slate-100 leading-tight mb-1">
+          <h4 className="text-sm font-medium text-white dark:text-green-50 leading-tight mb-1">
             {news.headline}
           </h4>
-          <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
+          <p className="text-xs text-green-100 dark:text-green-200 font-medium">
             {news.source}
           </p>
         </div>

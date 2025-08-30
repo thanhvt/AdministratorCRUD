@@ -14,26 +14,26 @@ export function TradingStats({ className }: TradingStatsProps) {
   const decliningPercentage = ((tradingStats.decliningStocks / totalStocks) * 100).toFixed(1)
 
   return (
-    <Card className={`bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20 border-emerald-200 dark:border-emerald-700 ${className}`}>
+    <Card className={`bg-green-gradient-full border-2 border-green-700 dark:border-green-400 shadow-lg shadow-green-500/20 ${className}`}>
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg font-semibold text-emerald-800 dark:text-emerald-200 flex items-center gap-2">
-          <Activity className="w-5 h-5" />
+        <CardTitle className="text-lg font-semibold text-white dark:text-green-100 flex items-center gap-2">
+          <Activity className="w-5 h-5 text-green-200" />
           Market Activity
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
-          <div className="text-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-emerald-200 dark:border-emerald-700">
-            <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+          <div className="text-center p-3 bg-green-gradient-secondary rounded-lg border-2 border-green-400 dark:border-green-300">
+            <div className="text-2xl font-bold text-white dark:text-green-50">
               {tradingStats.totalVolume}
             </div>
-            <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">Total Volume</div>
+            <div className="text-xs text-green-100 dark:text-green-200 mt-1 font-medium">Total Volume</div>
           </div>
-          <div className="text-center p-3 bg-white dark:bg-slate-800 rounded-lg border border-emerald-200 dark:border-emerald-700">
-            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="text-center p-3 bg-green-gradient-secondary rounded-lg border-2 border-green-400 dark:border-green-300">
+            <div className="text-2xl font-bold text-white dark:text-green-50">
               {totalStocks.toLocaleString()}
             </div>
-            <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">Active Stocks</div>
+            <div className="text-xs text-green-100 dark:text-green-200 mt-1 font-medium">Active Stocks</div>
           </div>
         </div>
 

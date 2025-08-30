@@ -13,80 +13,92 @@
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 220 70% 45%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 134 61% 41%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 120 60% 95%;
+    --muted-foreground: 120 10% 25%;
+    --accent: 134 61% 41%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
-    --ring: 220 70% 45%;
+    --border: 120 30% 75%;
+    --input: 120 30% 90%;
+    --ring: 142 76% 36%;
     --radius: 0.5rem;
 
-    /* Financial Trading Colors - High Contrast */
-    --financial-positive: 134 61% 41%;
+    /* Financial Trading Colors - High Contrast Green Theme */
+    --financial-positive: 120 100% 25%;
     --financial-positive-foreground: 0 0% 100%;
     --financial-negative: 0 84% 60%;
     --financial-negative-foreground: 0 0% 100%;
-    --financial-neutral: 220 9% 46%;
+    --financial-neutral: 120 20% 40%;
     --financial-neutral-foreground: 0 0% 100%;
 
-    /* Market Data Colors */
-    --market-bg: 220 14% 96%;
-    --market-border: 220 13% 91%;
-    --market-hover: 220 14% 93%;
+    /* Market Data Colors - Green Theme */
+    --market-bg: 120 60% 97%;
+    --market-border: 120 40% 85%;
+    --market-hover: 120 50% 93%;
 
-    /* Trading Interface Colors */
-    --trading-success: 142 76% 36%;
-    --trading-warning: 38 92% 50%;
-    --trading-info: 221 83% 53%;
-    --trading-volume: 262 83% 58%;
+    /* Trading Interface Colors - Green Focused */
+    --trading-success: 120 100% 25%;
+    --trading-warning: 45 100% 50%;
+    --trading-info: 150 80% 35%;
+    --trading-volume: 135 70% 40%;
+
+    /* Green Gradient Variables */
+    --green-gradient-1: 120 100% 25%;
+    --green-gradient-2: 134 61% 41%;
+    --green-gradient-3: 142 76% 36%;
+    --green-gradient-4: 150 80% 35%;
   }
 
   .dark {
-    --background: 220 15% 10%;
-    --foreground: 210 20% 98%;
-    --card: 220 15% 12%;
-    --card-foreground: 210 20% 98%;
-    --popover: 220 15% 10%;
-    --popover-foreground: 210 20% 98%;
-    --primary: 220 80% 65%;
-    --primary-foreground: 220 15% 10%;
-    --secondary: 220 15% 15%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 220 15% 15%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 220 15% 15%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 15% 22%;
-    --input: 220 15% 22%;
-    --ring: 220 80% 65%;
+    --background: 120 10% 5%;
+    --foreground: 120 15% 95%;
+    --card: 120 10% 8%;
+    --card-foreground: 120 15% 95%;
+    --popover: 120 10% 5%;
+    --popover-foreground: 120 15% 95%;
+    --primary: 134 61% 51%;
+    --primary-foreground: 120 10% 5%;
+    --secondary: 142 76% 46%;
+    --secondary-foreground: 120 10% 5%;
+    --muted: 120 10% 12%;
+    --muted-foreground: 120 10% 65%;
+    --accent: 134 61% 51%;
+    --accent-foreground: 120 10% 5%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 120 15% 20%;
+    --input: 120 15% 25%;
+    --ring: 134 61% 51%;
 
-    /* Financial Trading Colors - High Contrast Dark Mode */
-    --financial-positive: 134 61% 51%;
-    --financial-positive-foreground: 220 15% 10%;
+    /* Financial Trading Colors - High Contrast Green Dark Mode */
+    --financial-positive: 120 100% 45%;
+    --financial-positive-foreground: 120 10% 5%;
     --financial-negative: 0 84% 70%;
-    --financial-negative-foreground: 220 15% 10%;
-    --financial-neutral: 220 9% 56%;
-    --financial-neutral-foreground: 220 15% 10%;
+    --financial-negative-foreground: 120 10% 5%;
+    --financial-neutral: 120 20% 60%;
+    --financial-neutral-foreground: 120 10% 5%;
 
-    /* Market Data Colors - Dark Mode */
-    --market-bg: 220 15% 8%;
-    --market-border: 220 15% 18%;
-    --market-hover: 220 15% 12%;
+    /* Market Data Colors - Green Dark Mode */
+    --market-bg: 120 15% 8%;
+    --market-border: 120 15% 18%;
+    --market-hover: 120 15% 12%;
 
-    /* Trading Interface Colors - Dark Mode */
-    --trading-success: 142 76% 46%;
-    --trading-warning: 38 92% 60%;
-    --trading-info: 221 83% 63%;
-    --trading-volume: 262 83% 68%;
+    /* Trading Interface Colors - Green Focused Dark Mode */
+    --trading-success: 120 100% 45%;
+    --trading-warning: 45 100% 60%;
+    --trading-info: 150 80% 55%;
+    --trading-volume: 135 70% 60%;
+
+    /* Green Gradient Variables - Dark Mode */
+    --green-gradient-1: 120 100% 15%;
+    --green-gradient-2: 134 61% 21%;
+    --green-gradient-3: 142 76% 16%;
+    --green-gradient-4: 150 80% 15%;
   }
 }
 
@@ -99,7 +111,7 @@
   }
 }
 
-/* Financial Trading Utility Classes */
+/* Financial Trading Utility Classes - Green High Contrast */
 .financial-positive {
   color: hsl(var(--financial-positive));
 }
@@ -113,12 +125,29 @@
 }
 
 .market-card {
-  background: hsl(var(--market-bg));
+  background: linear-gradient(135deg, hsl(var(--green-gradient-1)), hsl(var(--green-gradient-2)));
   border-color: hsl(var(--market-border));
 }
 
 .market-card:hover {
-  background: hsl(var(--market-hover));
+  background: linear-gradient(135deg, hsl(var(--green-gradient-2)), hsl(var(--green-gradient-3)));
+}
+
+/* Green Gradient Utility Classes */
+.bg-green-gradient-primary {
+  background: linear-gradient(135deg, hsl(var(--green-gradient-1)), hsl(var(--green-gradient-2)));
+}
+
+.bg-green-gradient-secondary {
+  background: linear-gradient(135deg, hsl(var(--green-gradient-2)), hsl(var(--green-gradient-3)));
+}
+
+.bg-green-gradient-tertiary {
+  background: linear-gradient(135deg, hsl(var(--green-gradient-3)), hsl(var(--green-gradient-4)));
+}
+
+.bg-green-gradient-full {
+  background: linear-gradient(135deg, hsl(var(--green-gradient-1)), hsl(var(--green-gradient-2)), hsl(var(--green-gradient-3)), hsl(var(--green-gradient-4)));
 }
 
 @keyframes blob {
