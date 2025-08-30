@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@banking/services'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -15,7 +15,8 @@ export function ProtectedRoute({
   requiredPermissions = [], 
   fallbackUrl = '/login' 
 }: ProtectedRouteProps) {
-  const { data: session, status } = useSession()
+  const { session, isLoading, isAuthenticated, error } = useAuth()
+  const status = isLoading ? 'loading' : isAuthenticated ? 'authenticated' : 'unauthenticated'
   const router = useRouter()
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export function ProtectedRoute({
     }
 
     // Check for session errors (like expired tokens)
-    if (session?.error === 'RefreshAccessTokenError') {
+    if (error === 'RefreshAccessTokenError') {
       router.push('/login')
       return
     }
@@ -52,7 +53,7 @@ export function ProtectedRoute({
   }
 
   // Don't render children if not authenticated
-  if (status === 'unauthenticated' || session?.error === 'RefreshAccessTokenError') {
+  if (status === 'unauthenticated' || error === 'RefreshAccessTokenError') {
     return null
   }
 

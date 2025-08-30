@@ -1,13 +1,11 @@
 'use client'
 
 import { useSession, signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+
 import { useCallback, useEffect } from 'react'
 
 export function useAuth() {
   const { data: session, status, update } = useSession()
-  const router = useRouter()
-
   const isLoading = status === 'loading'
   const isAuthenticated = status === 'authenticated'
 
@@ -30,17 +28,12 @@ export function useAuth() {
   }, [session?.error])
 
   const logout = useCallback(async () => {
-    try {
-      await signOut({ 
-        callbackUrl: '/login',
-        redirect: true 
-      })
-    } catch (error) {
-      console.error('Logout error:', error)
-      // Force redirect to login even if logout fails
-      router.push('/login')
-    }
-  }, [router])
+    // signOut from next-auth handles all the necessary logic including redirect.
+    await signOut({
+      callbackUrl: '/login',
+      redirect: true
+    })
+  }, [])
 
   const refreshSession = useCallback(async () => {
     try {
@@ -58,5 +51,6 @@ export function useAuth() {
     logout,
     refreshSession,
     accessToken: session?.access_token,
+    error: session?.error,
   }
 }

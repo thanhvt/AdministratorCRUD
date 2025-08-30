@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useSession, signOut } from 'next-auth/react'
+import { useAuth } from '@banking/services'
 import { Button, Card, CardContent, CardHeader, CardTitle, Icon, Badge } from '@banking/ui'
 import { AuthTestRunner, TestResult } from '../../lib/test-auth-scenarios'
 
 export function AuthTestPanel() {
-  const { data: session, status } = useSession()
+  const { session, isLoading, isAuthenticated, logout } = useAuth()
+  const status = isLoading ? 'loading' : (isAuthenticated ? 'authenticated' : 'unauthenticated')
   const [testResults, setTestResults] = useState<TestResult[]>([])
   const [isRunning, setIsRunning] = useState(false)
 
@@ -39,7 +40,7 @@ export function AuthTestPanel() {
 
   const testLogout = async () => {
     if (confirm('This will log you out. Continue?')) {
-      await signOut({ callbackUrl: '/login' })
+      await logout()
     }
   }
 
