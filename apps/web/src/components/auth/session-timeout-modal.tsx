@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client'
 
 import { useState, useEffect } from 'react'
 import { Button } from '@banking/ui'
-import { useAuth } from '../../hooks/use-auth'
+import { useAuth } from '@banking/services'
 
 interface SessionTimeoutModalProps {
   isOpen: boolean

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Sidebar, Header, Footer } from "@banking/ui"
-import { useAuth } from "../../hooks/use-auth"
+import { useAuth } from "@banking/services"
 import { PageTransition } from './page-transition'
 
 interface DashboardLayoutProps {

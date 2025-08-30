@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { Button, Card, CardHeader, CardTitle, CardContent, Skeleton, Icon, Badge, staggerContainer, fadeIn } from '@banking/ui'
 import { DashboardLayout } from '../../components/layout/dashboard-layout'
 import { ProtectedRoute } from '../../components/auth/protected-route'
-import { useAuth } from '../../hooks/use-auth'
+import { useAuth } from '@banking/services'
 import { PERMISSIONS } from '../../lib/permissions'
 
 export default function DashboardPage() {
