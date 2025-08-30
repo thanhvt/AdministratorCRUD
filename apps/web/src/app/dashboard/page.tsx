@@ -53,7 +53,7 @@ export default function DashboardPage() {
             animate="show"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            <motion.div variants={fadeIn} className="lg:col-span-2">
+            <motion.div variants={fadeIn()} className="lg:col-span-2">
               <Card variant="interactive">
                 <CardHeader>
                   <CardTitle>Welcome Back, {user.name}!</CardTitle>
@@ -74,7 +74,7 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
 
-            <motion.div variants={fadeIn}>
+            <motion.div variants={fadeIn()}>
               <Card variant="interactive">
                 <CardHeader className="flex-row items-center justify-between">
                   <CardTitle>System Status</CardTitle>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
 
-            <motion.div variants={fadeIn}>
+            <motion.div variants={fadeIn()}>
               <Card variant="interactive">
                 <CardHeader className="flex-row items-center justify-between">
                   <CardTitle>Quick Actions</CardTitle>
@@ -115,7 +115,7 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
 
-            <motion.div variants={fadeIn}>
+            <motion.div variants={fadeIn()}>
               <Card variant="interactive">
                 <CardHeader className="flex-row items-center justify-between">
                   <CardTitle>Securities</CardTitle>
@@ -132,7 +132,7 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
 
-            <motion.div variants={fadeIn}>
+            <motion.div variants={fadeIn()}>
               <Card variant="interactive">
                 <CardHeader className="flex-row items-center justify-between">
                   <CardTitle>Trading</CardTitle>
@@ -149,7 +149,7 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
 
-            <motion.div variants={fadeIn}>
+            <motion.div variants={fadeIn()}>
               <Card variant="interactive">
                 <CardHeader className="flex-row items-center justify-between">
                   <CardTitle>User Settings</CardTitle>

@@ -1,9 +1,10 @@
+import { icons } from 'lucide-react';
 import * as React from 'react';
 import { Icon } from './icon';
 import { cn } from '../lib/utils';
 
 interface EmptyStateProps {
-  iconName: string;
+  iconName: keyof typeof icons;
   title: string;
   description: string;
   className?: string;
