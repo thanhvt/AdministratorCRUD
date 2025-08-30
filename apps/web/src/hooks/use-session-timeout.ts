@@ -19,8 +19,8 @@ export const useSessionTimeout = (options: UseSessionTimeoutOptions = {}) => {
   const logoutTimeoutRef = useRef<NodeJS.Timeout>()
   const lastActivityRef = useRef<Date>(new Date())
 
-  const warningTime = options.warningTime || 1 // 5 minutes warning
-  const maxIdleTime = options.maxIdleTime || 1 // 30 minutes max idle
+  const warningTime = options.warningTime || 5 // 5 minutes warning
+  const maxIdleTime = options.maxIdleTime || 30 // 30 minutes max idle
 
   const isAuthenticated = status === 'authenticated'
 

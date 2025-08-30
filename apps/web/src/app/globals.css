@@ -27,6 +27,25 @@
     --input: 220 13% 88%;
     --ring: 220 70% 45%;
     --radius: 0.5rem;
+
+    /* Financial Trading Colors - High Contrast */
+    --financial-positive: 134 61% 41%;
+    --financial-positive-foreground: 0 0% 100%;
+    --financial-negative: 0 84% 60%;
+    --financial-negative-foreground: 0 0% 100%;
+    --financial-neutral: 220 9% 46%;
+    --financial-neutral-foreground: 0 0% 100%;
+
+    /* Market Data Colors */
+    --market-bg: 220 14% 96%;
+    --market-border: 220 13% 91%;
+    --market-hover: 220 14% 93%;
+
+    /* Trading Interface Colors */
+    --trading-success: 142 76% 36%;
+    --trading-warning: 38 92% 50%;
+    --trading-info: 221 83% 53%;
+    --trading-volume: 262 83% 58%;
   }
 
   .dark {
@@ -49,6 +68,25 @@
     --border: 220 15% 22%;
     --input: 220 15% 22%;
     --ring: 220 80% 65%;
+
+    /* Financial Trading Colors - High Contrast Dark Mode */
+    --financial-positive: 134 61% 51%;
+    --financial-positive-foreground: 220 15% 10%;
+    --financial-negative: 0 84% 70%;
+    --financial-negative-foreground: 220 15% 10%;
+    --financial-neutral: 220 9% 56%;
+    --financial-neutral-foreground: 220 15% 10%;
+
+    /* Market Data Colors - Dark Mode */
+    --market-bg: 220 15% 8%;
+    --market-border: 220 15% 18%;
+    --market-hover: 220 15% 12%;
+
+    /* Trading Interface Colors - Dark Mode */
+    --trading-success: 142 76% 46%;
+    --trading-warning: 38 92% 60%;
+    --trading-info: 221 83% 63%;
+    --trading-volume: 262 83% 68%;
   }
 }
 
@@ -59,6 +97,28 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+}
+
+/* Financial Trading Utility Classes */
+.financial-positive {
+  color: hsl(var(--financial-positive));
+}
+
+.financial-negative {
+  color: hsl(var(--financial-negative));
+}
+
+.financial-neutral {
+  color: hsl(var(--financial-neutral));
+}
+
+.market-card {
+  background: hsl(var(--market-bg));
+  border-color: hsl(var(--market-border));
+}
+
+.market-card:hover {
+  background: hsl(var(--market-hover));
 }
 
 @keyframes blob {
@@ -86,4 +146,45 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px hsl(var(--financial-positive) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--financial-positive) / 0.6);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
