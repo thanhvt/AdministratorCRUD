@@ -11,6 +11,7 @@ export interface UseSessionTimeoutOptions {
 }
 
 export const useSessionTimeout = (options: UseSessionTimeoutOptions = {}) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: session, status } = useSession()
   const [sessionWarningShown, setSessionWarningShown] = useState(false)
   
@@ -18,8 +19,8 @@ export const useSessionTimeout = (options: UseSessionTimeoutOptions = {}) => {
   const logoutTimeoutRef = useRef<NodeJS.Timeout>()
   const lastActivityRef = useRef<Date>(new Date())
 
-  const warningTime = options.warningTime || 5 // 5 minutes warning
-  const maxIdleTime = options.maxIdleTime || 30 // 30 minutes max idle
+  const warningTime = options.warningTime || 1 // 5 minutes warning
+  const maxIdleTime = options.maxIdleTime || 1 // 30 minutes max idle
 
   const isAuthenticated = status === 'authenticated'
 
@@ -49,23 +50,27 @@ export const useSessionTimeout = (options: UseSessionTimeoutOptions = {}) => {
     }, logoutTimeMs)
   }, [isAuthenticated, maxIdleTime, warningTime, options])
 
-  const handleActivity = useCallback(() => {
-    if (!isAuthenticated) return
-    
-    const now = new Date()
-    const timeSinceLastActivity = now.getTime() - lastActivityRef.current.getTime()
-    
-    // Only update if more than 1 minute has passed to avoid excessive updates
-    if (timeSinceLastActivity > 60000) {
-      lastActivityRef.current = now
-      setSessionWarningShown(false)
-      resetTimers()
-    }
-  }, [isAuthenticated, resetTimers])
-
   const extendSession = useCallback(() => {
-    handleActivity()
-  }, [handleActivity])
+    // Directly hide the warning modal and reset the timers.
+    setSessionWarningShown(false);
+    lastActivityRef.current = new Date();
+    resetTimers();
+  }, [resetTimers]);
+
+  const handleActivity = useCallback(() => {
+    // If the warning is already shown, passive activity like mouse movement should not reset the timer.
+    // The user must actively click the button in the modal.
+    if (!isAuthenticated || sessionWarningShown) return;
+
+    const now = new Date();
+    const timeSinceLastActivity = now.getTime() - lastActivityRef.current.getTime();
+
+    // Throttle to prevent excessive resets from constant events.
+    if (timeSinceLastActivity > 60000) {
+      lastActivityRef.current = new Date();
+      resetTimers();
+    }
+  }, [isAuthenticated, sessionWarningShown, resetTimers]);
 
   const hideSessionWarning = useCallback(() => {
     setSessionWarningShown(false)

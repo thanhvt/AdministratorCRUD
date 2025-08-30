@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { useSession } from 'next-auth/react'
+import { useAuth } from '@banking/services'
 
 export function useTokenRefresh() {
-  const { data: session, update } = useSession()
+  const { accessToken, refreshSession: update } = useAuth()
   const refreshTimeoutRef = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
@@ -13,13 +13,13 @@ export function useTokenRefresh() {
       clearTimeout(refreshTimeoutRef.current)
     }
 
-    if (!session?.access_token) {
+    if (!accessToken) {
       return
     }
 
     // Calculate time until token refresh (5 minutes before expiration)
     const now = Date.now()
-    const tokenData = parseJwt(session.access_token)
+    const tokenData = parseJwt(accessToken)
     
     if (!tokenData?.exp) {
       return
@@ -47,7 +47,7 @@ export function useTokenRefresh() {
         clearTimeout(refreshTimeoutRef.current)
       }
     }
-  }, [session?.access_token, update])
+  }, [accessToken, update])
 }
 
 // Helper function to parse JWT token

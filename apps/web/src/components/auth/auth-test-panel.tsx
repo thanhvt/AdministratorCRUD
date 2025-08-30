@@ -6,7 +6,7 @@ import { Button, Card, CardContent, CardHeader, CardTitle, Icon, Badge } from '@
 import { AuthTestRunner, TestResult } from '../../lib/test-auth-scenarios'
 
 export function AuthTestPanel() {
-  const { session, isLoading, isAuthenticated, logout } = useAuth()
+  const { session, isLoading, isAuthenticated, logout, accessToken, error } = useAuth()
   const status = isLoading ? 'loading' : (isAuthenticated ? 'authenticated' : 'unauthenticated')
   const [testResults, setTestResults] = useState<TestResult[]>([])
   const [isRunning, setIsRunning] = useState(false)
@@ -85,14 +85,14 @@ export function AuthTestPanel() {
                 </div>
                 <div className="flex justify-between">
                   <span>Access Token:</span>
-                  <Badge variant={session?.access_token ? 'success' : 'secondary'}>
-                    {session?.access_token ? 'Present' : 'None'}
+                  <Badge variant={accessToken ? 'success' : 'secondary'}>
+                    {accessToken ? 'Present' : 'None'}
                   </Badge>
                 </div>
                 <div className="flex justify-between">
                   <span>Error:</span>
                   <span className="text-destructive">
-                    {session?.error || 'None'}
+                    {error || 'None'}
                   </span>
                 </div>
               </div>
