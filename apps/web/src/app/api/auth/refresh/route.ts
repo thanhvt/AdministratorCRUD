@@ -1,92 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken'
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
-const REFRESH_SECRET = process.env.REFRESH_SECRET || 'your-refresh-secret'
-
-// Mock user database (same as login)
-const mockUsers = [
-  {
-    id: '1',
-    email: 'admin@banking.com',
-    name: 'Administrator',
-    role: 'admin' as const,
-    permissions: ['read', 'write', 'delete', 'admin'],
-  },
-  {
-    id: '2',
-    email: 'trader@banking.com',
-    name: 'John Trader',
-    role: 'trader' as const,
-    permissions: ['read', 'write', 'trading'],
-  },
-  {
-    id: '3',
-    email: 'user@banking.com',
-    name: 'Jane User',
-    role: 'user' as const,
-    permissions: ['read'],
-  },
-]
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from '../../../../lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
-    const refreshToken = request.cookies.get('refresh-token')?.value
+    const session = await getServerSession(authOptions)
 
-    if (!refreshToken) {
+    if (!session?.refresh_token) {
       return NextResponse.json(
-        { success: false, message: 'Refresh token not found' },
+        { success: false, message: 'No refresh token available' },
         { status: 401 }
       )
     }
 
-    // Verify refresh token
-    let decoded: any
+    // Refresh token with Keycloak
     try {
-      decoded = jwt.verify(refreshToken, REFRESH_SECRET)
-    } catch (error) {
+      const response = await fetch(process.env.REFRESH_TOKEN_URL!, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          client_id: process.env.FRONTEND_CLIENT_ID!,
+          client_secret: process.env.FRONTEND_CLIENT_SECRET!,
+          grant_type: "refresh_token",
+          refresh_token: session.refresh_token as string,
+        }),
+        method: "POST",
+      })
+
+      const tokens = await response.json()
+
+      if (!response.ok) {
+        throw new Error(tokens.error || 'Token refresh failed')
+      }
+
+      return NextResponse.json({
+        success: true,
+        message: 'Token refreshed successfully',
+        data: {
+          access_token: tokens.access_token,
+          expires_in: tokens.expires_in,
+        },
+      })
+    } catch (refreshError) {
+      console.error('Keycloak token refresh error:', refreshError)
       return NextResponse.json(
-        { success: false, message: 'Invalid refresh token' },
+        { success: false, message: 'Token refresh failed' },
         { status: 401 }
       )
     }
-
-    // Find user
-    const user = mockUsers.find(u => u.id === decoded.userId)
-    if (!user) {
-      return NextResponse.json(
-        { success: false, message: 'User not found' },
-        { status: 401 }
-      )
-    }
-
-    // Generate new access token
-    const newAccessToken = jwt.sign(
-      { 
-        userId: user.id, 
-        email: user.email, 
-        role: user.role 
-      },
-      JWT_SECRET,
-      { expiresIn: '15m' }
-    )
-
-    // Create response
-    const response = NextResponse.json({
-      success: true,
-      message: 'Token refreshed successfully',
-    })
-
-    // Set new access token cookie
-    response.cookies.set('auth-token', newAccessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 15 * 60, // 15 minutes
-      path: '/',
-    })
-
-    return response
   } catch (error) {
     console.error('Token refresh error:', error)
     return NextResponse.json(

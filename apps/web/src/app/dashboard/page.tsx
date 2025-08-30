@@ -1,21 +1,18 @@
 'use client'
 
-import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuthStore } from '@banking/services'
 import { motion } from 'framer-motion'
 import { Button, Card, CardHeader, CardTitle, CardContent, Skeleton, Icon, Badge, staggerContainer, fadeIn } from '@banking/ui'
 import { DashboardLayout } from '../../components/layout/dashboard-layout'
+import { ProtectedRoute } from '../../components/auth/protected-route'
+import { useAuth } from '../../hooks/use-auth'
+import { PERMISSIONS } from '../../lib/permissions'
 
 export default function DashboardPage() {
-    const router = useRouter()
-  const { user, getCurrentUser, logout } = useAuthStore()
+  const router = useRouter()
+  const { user, logout, isLoading } = useAuth()
 
-  useEffect(() => {
-    getCurrentUser()
-  }, [getCurrentUser])
-
-  if (!user) {
+  if (isLoading) {
     return (
       <DashboardLayout>
         <div className="space-y-6">
@@ -37,15 +34,16 @@ export default function DashboardPage() {
   }
 
   return (
-    <DashboardLayout>
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <Button onClick={() => logout()} variant="outline">
-            <Icon name="LogOut" className="mr-2 h-4 w-4" />
-            Logout
-          </Button>
-        </div>
+    <ProtectedRoute requiredPermissions={[PERMISSIONS.READ]}>
+      <DashboardLayout>
+        <div className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold">Dashboard</h1>
+            <Button onClick={() => logout()} variant="outline">
+              <Icon name="LogOut" className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+          </div>
 
         <motion.div
             variants={staggerContainer}
@@ -56,18 +54,18 @@ export default function DashboardPage() {
             <motion.div variants={fadeIn()} className="lg:col-span-2">
               <Card variant="interactive">
                 <CardHeader>
-                  <CardTitle>Welcome Back, {user.name}!</CardTitle>
+                  <CardTitle>Welcome Back, {user?.name || 'User'}!</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground">Here's a summary of your administrative panel.</p>
+                  <p className="text-sm text-muted-foreground">Here is a summary of your administrative panel.</p>
                   <div className="mt-4 grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Email</p>
-                      <p className="font-semibold">{user.email}</p>
+                      <p className="font-semibold">{user?.email || 'N/A'}</p>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Role</p>
-                      <p className="font-semibold capitalize">{user.role}</p>
+                      <p className="font-semibold capitalize">{user?.role || 'N/A'}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -166,7 +164,8 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
           </motion.div>
-      </div>
-    </DashboardLayout>
+        </div>
+      </DashboardLayout>
+    </ProtectedRoute>
   )
 }

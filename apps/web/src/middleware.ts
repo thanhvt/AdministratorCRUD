@@ -1,19 +1,22 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 
 // Define protected routes
-const protectedRoutes = ['/dashboard', '/securities', '/trading', '/settings']
+const protectedRoutes = ['/dashboard', '/securities', '/trading', '/settings', '/user-settings']
 const authRoutes = ['/login', '/register']
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  
-  // Get auth token from cookies
-  const authToken = request.cookies.get('auth-token')?.value
-  const refreshToken = request.cookies.get('refresh-token')?.value
-  
+
+  // Get NextAuth token
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET
+  })
+
   // Check if user is authenticated
-  const isAuthenticated = !!(authToken || refreshToken)
+  const isAuthenticated = !!token
   
   // Check if current path is protected
   const isProtectedRoute = protectedRoutes.some(route => 

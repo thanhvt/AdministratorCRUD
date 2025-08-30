@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@banking/ui'
-import { useAuthStore } from '@banking/services'
+import { useAuth } from '../../hooks/use-auth'
 
 interface SessionTimeoutModalProps {
   isOpen: boolean
@@ -11,7 +11,7 @@ interface SessionTimeoutModalProps {
 
 export function SessionTimeoutModal({ isOpen, onExtendSession }: SessionTimeoutModalProps) {
   const [countdown, setCountdown] = useState(300) // 5 minutes in seconds
-  const { logout } = useAuthStore()
+  const { logout } = useAuth()
 
   useEffect(() => {
     if (!isOpen) {

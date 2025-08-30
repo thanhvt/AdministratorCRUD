@@ -1,0 +1,69 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
+import { useSession } from 'next-auth/react'
+
+export function useTokenRefresh() {
+  const { data: session, update } = useSession()
+  const refreshTimeoutRef = useRef<NodeJS.Timeout>()
+
+  useEffect(() => {
+    // Clear existing timeout
+    if (refreshTimeoutRef.current) {
+      clearTimeout(refreshTimeoutRef.current)
+    }
+
+    if (!session?.access_token) {
+      return
+    }
+
+    // Calculate time until token refresh (5 minutes before expiration)
+    const now = Date.now()
+    const tokenData = parseJwt(session.access_token)
+    
+    if (!tokenData?.exp) {
+      return
+    }
+
+    const expirationTime = tokenData.exp * 1000 // Convert to milliseconds
+    const fiveMinutesInMs = 5 * 60 * 1000
+    const refreshTime = expirationTime - fiveMinutesInMs
+    const timeUntilRefresh = refreshTime - now
+
+    // Only set timeout if refresh time is in the future
+    if (timeUntilRefresh > 0) {
+      refreshTimeoutRef.current = setTimeout(async () => {
+        try {
+          console.log('Refreshing token proactively...')
+          await update()
+        } catch (error) {
+          console.error('Token refresh failed:', error)
+        }
+      }, timeUntilRefresh)
+    }
+
+    return () => {
+      if (refreshTimeoutRef.current) {
+        clearTimeout(refreshTimeoutRef.current)
+      }
+    }
+  }, [session?.access_token, update])
+}
+
+// Helper function to parse JWT token
+function parseJwt(token: string) {
+  try {
+    const base64Url = token.split('.')[1]
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    )
+    return JSON.parse(jsonPayload)
+  } catch (error) {
+    console.error('Failed to parse JWT:', error)
+    return null
+  }
+}

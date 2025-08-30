@@ -1,6 +1,6 @@
 'use client'
 
-import { useSessionTimeout } from '@banking/services'
+import { useSessionTimeout } from '../../hooks/use-session-timeout'
 import { SessionTimeoutModal } from '../auth/session-timeout-modal'
 
 interface SessionTimeoutProviderProps {

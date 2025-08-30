@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Sidebar, Header, Footer } from "@banking/ui"
-import { useAuthStore } from "@banking/services"
+import { useAuth } from "../../hooks/use-auth"
 import { PageTransition } from './page-transition'
 
 interface DashboardLayoutProps {
@@ -11,7 +11,7 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false)
-  const { user, logout } = useAuthStore()
+  const { user, logout } = useAuth()
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed)

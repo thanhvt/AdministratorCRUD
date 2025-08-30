@@ -1,104 +1,84 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
+import { useState } from 'react'
 import {
   Button,
-  Input,
   Card,
   CardContent,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
   Icon,
 } from '@banking/ui'
-import { useAuthStore } from '@banking/services'
-
-const formSchema = z.object({
-  email: z.string().email("Invalid email address."),
-  password: z.string().min(1, "Password is required."),
-})
+import { ErrorNotification } from './error-notification'
+import { handleAuthError } from '../../lib/error-handling'
 
 export function LoginForm() {
-  const { login } = useAuthStore()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: 'admin@banking.com',
-      password: 'admin123',
-    },
-  })
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
 
-  const { isSubmitting } = form.formState
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const handleKeycloakLogin = async () => {
     try {
-      await login(values)
-      router.push('/dashboard')
-    } catch (err: any) {
-      form.setError('root', {
-        type: 'manual',
-        message: err.message || 'Login failed. Please check your credentials.',
+      setIsLoading(true)
+      setError(null)
+
+      const result = await signIn('keycloak', {
+        callbackUrl,
+        redirect: false,
       })
+
+      if (result?.error) {
+        handleAuthError(new Error(result.error), { context: 'keycloak_signin' })
+        setError('Authentication failed. Please try again.')
+      } else if (result?.ok) {
+        router.push(callbackUrl)
+      }
+    } catch (err: unknown) {
+      const error = err as Error
+      handleAuthError(error, { context: 'keycloak_signin_catch' })
+      setError(error.message || 'An unexpected error occurred.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <Card variant="glass" className="w-full">
-      <CardContent className="p-6">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input type="email" placeholder="Email" {...field} />
-                  </FormControl>
-                  <FormLabel>Email</FormLabel>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input type="password" placeholder="Password" {...field} />
-                  </FormControl>
-                  <FormLabel>Password</FormLabel>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <div className="w-full space-y-4">
+      <ErrorNotification />
 
-            {form.formState.errors.root && (
-              <div className="text-destructive text-sm font-medium text-center">
-                {form.formState.errors.root.message}
+      <Card variant="glass" className="w-full">
+        <CardContent className="p-6">
+          <div className="space-y-6">
+            {error && (
+              <div className="text-destructive text-sm font-medium text-center bg-destructive/10 p-3 rounded-md">
+                {error}
               </div>
             )}
 
-            <Button type="submit" className="w-full" loading={isSubmitting} variant="premium">
-              Sign In
-            </Button>
-          </form>
-        </Form>
+          <Button
+            onClick={handleKeycloakLogin}
+            className="w-full"
+            loading={isLoading}
+            variant="premium"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Signing in...' : 'Sign in with Keycloak'}
+          </Button>
+
+          <div className="text-center text-sm text-muted-foreground">
+            <p>You will be redirected to Keycloak for secure authentication</p>
+          </div>
+        </div>
       </CardContent>
 
-            <div className="mt-6 flex items-center justify-center">
-              <Icon name="Lock" className="h-4 w-4 text-muted-foreground" />
-              <p className="ml-2 text-xs text-muted-foreground">Secure SSL Connection</p>
-            </div>
-    </Card>
+        <div className="mt-6 flex items-center justify-center">
+          <Icon name="Lock" className="h-4 w-4 text-muted-foreground" />
+          <p className="ml-2 text-xs text-muted-foreground">Secure SSL Connection</p>
+        </div>
+      </Card>
+    </div>
   )
 }

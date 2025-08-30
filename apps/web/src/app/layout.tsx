@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { SessionProvider } from '../components/providers/session-provider'
 import { SessionTimeoutProvider } from '../components/providers/session-timeout-provider'
 import { QueryProvider } from '../components/providers/query-provider'
 import { ThemeProvider } from '../components/providers/theme-provider'
 import { Toaster } from '@banking/ui'
+import { AuthErrorBoundary } from '../components/auth/auth-error-boundary'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,12 +29,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>
-            <SessionTimeoutProvider>
-              {children}
-              <Toaster />
-            </SessionTimeoutProvider>
-          </QueryProvider>
+          <AuthErrorBoundary>
+            <SessionProvider>
+              <QueryProvider>
+                <SessionTimeoutProvider>
+                  {children}
+                  <Toaster />
+                </SessionTimeoutProvider>
+              </QueryProvider>
+            </SessionProvider>
+          </AuthErrorBoundary>
         </ThemeProvider>
       </body>
     </html>
