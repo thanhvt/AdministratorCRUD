@@ -1,6 +1,6 @@
 import { LoginButton } from '../../components/auth/login-button';
 import { Logo } from '../../components/layout/logo';
-import { Leaf, Globe, Users, Heart, ArrowRight, Play } from 'lucide-react';
+import { Leaf, Globe, Users, Heart, Play } from 'lucide-react';
 
 export default function LoginPage() {
   return (
