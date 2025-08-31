@@ -126,6 +126,7 @@ export {
 
 // Animations
 export { staggerContainer, fadeIn, slideIn } from "./lib/animations"
+export { default as SplashCursor } from "./components/splashCursor";
 
 // Utils
 /** Utility functions */

@@ -1,9 +1,13 @@
+'use client';
+
+import { SplashCursor } from '@banking/ui';
 import { LoginButton } from '../../components/auth/login-button';
 import { Logo } from '../../components/layout/logo';
 import { Leaf, Globe, Users, Heart, Play } from 'lucide-react';
 
 export default function LoginPage() {
   return (
+    <SplashCursor>
     <main className="relative min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-900 dark:via-emerald-900 dark:to-teal-900 overflow-hidden">
       {/* Navigation Header */}
       <nav className="absolute top-0 left-0 right-0 z-50 p-6">
@@ -241,5 +245,6 @@ export default function LoginPage() {
         </div>
       </footer>
     </main>
+    </SplashCursor>
   );
 }
