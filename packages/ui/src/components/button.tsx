@@ -23,7 +23,6 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         premium: "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-md hover:shadow-lg transform hover:-translate-y-0.5",
-        ecogradient: "text-white font-semibold shadow-lg rounded-xl px-8 py-4 transition-all duration-300 ease-in-out bg-gradient-to-r from-[hsl(var(--btn-grad-color-1))] to-[hsl(var(--btn-grad-color-4))] hover:scale-105 hover:shadow-xl active:scale-98",
         shine: "text-primary-foreground bg-primary hover:bg-primary/90 relative overflow-hidden before:content-[''] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:transition-transform before:duration-500 hover:before:translate-x-full"
       },
       size: {

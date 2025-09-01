@@ -56,8 +56,6 @@
     --gradient-2: var(--eco-green-dark);
     --gradient-3: var(--eco-green-light);
     --gradient-4: var(--deep-black);
-
-
   }
 
   .dark {
@@ -106,8 +104,6 @@
     --gradient-2: 142 65% 30%;
     --gradient-3: 142 65% 50%;
     --gradient-4: var(--dark-bg);
-
-
   }
 }
 
@@ -296,7 +292,22 @@
   @apply border border-white/20 dark:border-gray-700/50;
 }
 
+/* 🌿 Modern Gradient CTA Button */
+.btn-eco-gradient {
+  @apply text-white font-semibold shadow-lg rounded-xl px-8 py-4;
+  @apply transition-all duration-300 ease-in-out;
+  background-image: linear-gradient(to right, hsl(var(--eco-green-light)), hsl(var(--eco-green)), hsl(var(--eco-green-dark)), hsl(160, 60%, 20%));
+}
 
+.btn-eco-gradient:hover {
+  @apply shadow-xl;
+  transform: scale(1.05);
+  background-image: linear-gradient(to right, hsl(var(--eco-green-light)), hsl(var(--eco-green)), hsl(var(--eco-green-dark)), hsl(160, 60%, 35%));
+}
+
+.btn-eco-gradient:active {
+  transform: scale(0.98);
+}
 
 /* 🌿 Gradient Text */
 .text-gradient-green {
