@@ -7,77 +7,103 @@
 @layer base {
   :root {
     --font-sans: 'Inter', sans-serif;
-    --background: 0 0% 100%; /* Trắng */
-    --foreground: 224 71% 4%; /* Đen rất đậm */
-    --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
+
+    /* 🌿 Core Color Palette */
+    --eco-green: 142 62% 35%;
+    --eco-green-dark: 142 55% 26%;
+    --eco-green-light: 142 85% 80%;
+    --white: 0 0% 100%;
+    --deep-black: 224 71% 4%;
+    --neutral-grey: 220 9% 46%;
+    --light-grey: 220 15% 95%;
+    --medium-grey: 220 10% 40%;
+    --border-grey: 220 15% 88%;
+    --destructive-red: 0 85% 60%;
+
+    /* 🎨 Theme Variables */
+    --background: var(--white); /* Trắng */
+    --foreground: var(--deep-black); /* Đen rất đậm */
+    --card: var(--white);
+    --card-foreground: var(--deep-black);
+    --popover: var(--white);
+    --popover-foreground: var(--deep-black);
 
     /* EcoNest Primary */
-    --primary: 142 72% 45%; /* Xanh lá tươi (#22C55E) */
-    --primary-foreground: 0 0% 100%;
+    --primary: var(--eco-green);
+    --primary-foreground: var(--white);
 
     /* Secondary (Xám / Đen nhẹ) */
-    --secondary: 220 9% 46%; /* Xám trung tính (#6B7280) */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: var(--neutral-grey);
+    --secondary-foreground: var(--white);
 
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 10% 40%;
+    --muted: var(--light-grey);
+    --muted-foreground: var(--medium-grey);
 
     /* Accent = dùng lại màu xanh lá sáng */
-    --accent: 142 72% 45%;
-    --accent-foreground: 0 0% 100%;
+    --accent: var(--eco-green);
+    --accent-foreground: var(--white);
 
-    --destructive: 0 85% 60%; /* Đỏ nhấn */
-    --destructive-foreground: 0 0% 100%;
+    --destructive: var(--destructive-red);
+    --destructive-foreground: var(--white);
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 142 72% 45%;
+    --border: var(--border-grey);
+    --input: var(--border-grey);
+    --ring: var(--eco-green);
     --radius: 0.5rem;
 
     /* Gradient Variables - Eco Theme */
-    --gradient-1: 142 72% 45%; /* Xanh lá EcoNest */
-    --gradient-2: 142 65% 36%; /* Xanh lá đậm */
-    --gradient-3: 142 65% 60%; /* Xanh lá nhạt */
-    --gradient-4: 224 71% 4%;  /* Đen đậm */
+    --gradient-1: var(--eco-green);
+    --gradient-2: var(--eco-green-dark);
+    --gradient-3: var(--eco-green-light);
+    --gradient-4: var(--deep-black);
   }
 
   .dark {
-    --background: 220 20% 6%; /* Nền đen xanh rất tối */
-    --foreground: 210 20% 90%; /* Trắng xám */
+    /* 🌿 Core Color Palette (Dark) */
+    --dark-bg: 220 20% 6%;
+    --dark-fg: 210 20% 90%;
+    --dark-card-bg: 220 20% 10%;
+    --dark-secondary-bg: 220 10% 60%;
+    --dark-muted-bg: 220 15% 12%;
+    --dark-muted-fg: 220 10% 65%;
+    --dark-destructive: 0 90% 60%;
+    --dark-border: 220 15% 20%;
+    --dark-input: 220 15% 25%;
 
-    --card: 220 20% 10%;
-    --card-foreground: 210 20% 90%;
+    /* 🎨 Theme Variables (Dark) */
+    --background: var(--dark-bg); /* Nền đen xanh rất tối */
+    --foreground: var(--dark-fg); /* Trắng xám */
 
-    --popover: 220 20% 6%;
-    --popover-foreground: 210 20% 90%;
+    --card: var(--dark-card-bg);
+    --card-foreground: var(--dark-fg);
 
-    --primary: 142 72% 45%; /* Xanh lá sáng vẫn giữ */
-    --primary-foreground: 220 20% 6%;
+    --popover: var(--dark-bg);
+    --popover-foreground: var(--dark-fg);
 
-    --secondary: 220 10% 60%; /* Xám sáng */
-    --secondary-foreground: 220 20% 6%;
+    --primary: var(--eco-green); /* Xanh lá sáng vẫn giữ */
+    --primary-foreground: var(--dark-bg);
 
-    --muted: 220 15% 12%;
-    --muted-foreground: 220 10% 65%;
+    --secondary: var(--dark-secondary-bg); /* Xám sáng */
+    --secondary-foreground: var(--dark-bg);
 
-    --accent: 142 72% 45%;
-    --accent-foreground: 220 20% 6%;
+    --muted: var(--dark-muted-bg);
+    --muted-foreground: var(--dark-muted-fg);
 
-    --destructive: 0 90% 60%;
-    --destructive-foreground: 220 20% 6%;
+    --accent: var(--eco-green);
+    --accent-foreground: var(--dark-bg);
 
-    --border: 220 15% 20%;
-    --input: 220 15% 25%;
-    --ring: 142 72% 45%;
+    --destructive: var(--dark-destructive);
+    --destructive-foreground: var(--dark-bg);
+
+    --border: var(--dark-border);
+    --input: var(--dark-input);
+    --ring: var(--eco-green);
 
     /* Gradient Variables - Dark Eco Theme */
     --gradient-1: 142 72% 40%;
     --gradient-2: 142 65% 30%;
     --gradient-3: 142 65% 50%;
-    --gradient-4: 220 20% 6%;
+    --gradient-4: var(--dark-bg);
   }
 }
 
@@ -264,6 +290,23 @@
 .card-glass {
   @apply backdrop-blur-sm bg-white/80 dark:bg-gray-800/80;
   @apply border border-white/20 dark:border-gray-700/50;
+}
+
+/* 🌿 Modern Gradient CTA Button */
+.btn-eco-gradient {
+  @apply text-white font-semibold shadow-lg rounded-xl px-8 py-4;
+  @apply transition-all duration-300 ease-in-out;
+  background-image: linear-gradient(to right, hsl(var(--eco-green-light)), hsl(var(--eco-green)), hsl(var(--eco-green-dark)), hsl(160, 60%, 20%));
+}
+
+.btn-eco-gradient:hover {
+  @apply shadow-xl;
+  transform: scale(1.05);
+  background-image: linear-gradient(to right, hsl(var(--eco-green-light)), hsl(var(--eco-green)), hsl(var(--eco-green-dark)), hsl(160, 60%, 35%));
+}
+
+.btn-eco-gradient:active {
+  transform: scale(0.98);
 }
 
 /* 🌿 Gradient Text */
