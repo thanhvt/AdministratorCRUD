@@ -140,7 +140,7 @@ export default function DashboardPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     Execute trades and monitor market positions.
                   </p>
-                  <Button className="w-full btn-eco-gradient btn-modern" onClick={() => router.push('/trading')}>
+                  <Button variant="ecogradient" className="w-full btn-modern" onClick={() => router.push('/trading')}>
                     Access Trading
                   </Button>
                 </CardContent>

@@ -1,6 +1,6 @@
 'use client';
 
-import { SplashCursor } from '@banking/ui';
+import { Button, SplashCursor } from '@banking/ui';
 import { LoginButton } from '../../components/auth/login-button';
 import { Logo } from '../../components/layout/logo';
 import { Leaf, Globe, Users, Heart, Play } from 'lucide-react';
@@ -93,10 +93,10 @@ export default function LoginPage() {
 
             {/* Call-to-Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="btn-eco-gradient btn-modern inline-flex items-center justify-center">
+              <Button variant="ecogradient" className="btn-modern">
                 <Heart className="w-5 h-5 mr-2" />
                 Donate Now
-              </button>
+              </Button>
 
               <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-green-500 hover:text-green-600 dark:hover:text-green-400 font-semibold rounded-xl transition-all duration-200 hover:scale-105">
                 <Play className="w-5 h-5 mr-2" />
